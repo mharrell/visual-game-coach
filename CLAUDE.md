@@ -17,8 +17,9 @@ following a shared pattern (see `.claude/skills/coach-pattern/`).
    meta reference + optional aggregate stats).
 3. **Mine the game's own logs** — replays/logs contain more than the player sees
    (opponent data, full move streams). This is the data asset.
-4. **Curated meta screenshots** — user-taken, refreshed on patches, fetched
-   per-decision (only the relevant subset), not all at once.
+4. **Structured meta reference** — a JSON DB (comps, cards, trinkets, dark gifts,
+   heroes, minions, tavern spells) in `hearth-coach/meta/`, refreshed on patches,
+   fetched per-decision (only the relevant subset), not all at once.
 5. **breakoutBot discipline** — verify what a vision model actually reads;
    observational data is not causal; sham-control any "coaching helps" claim;
    design before implementing.
@@ -27,5 +28,9 @@ following a shared pattern (see `.claude/skills/coach-pattern/`).
 
 - Hearthstone logs live at `C:\Program Files (x86)\Hearthstone\Logs\...` (see the
   `hearth-powerlog-locate` skill).
-- `hearth-coach/parse_bg.py` needs `hslog` deps from PyPI (network was down at
-  bootstrap; retry as needed).
+- `hearth-coach/` tools: `board_state.py` (board parse), `bans.py` (per-game
+  5/5 family ban + comp filter), `scrape_comps.py` (hsreplay comps),
+  `coach_llm.py` (DeepSeek v4 flash client). Meta DB in `hearth-coach/meta/`.
+- hsreplay's minions/heroes/dark-gifts APIs are Cloudflare-protected (403) —
+  those meta assets come from manual paste; comps/trinkets pages and the wiki
+  (hearthstone.wiki.gg) are scrapable.
