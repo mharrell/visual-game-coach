@@ -30,7 +30,9 @@ following a shared pattern (see `.claude/skills/coach-pattern/`).
   `hearth-powerlog-locate` skill).
 - `hearth-coach/` tools: `board_state.py` (board parse), `bans.py` (per-game
   5/5 family ban + comp filter), `scrape_comps.py` (hsreplay comps),
-  `coach_llm.py` (DeepSeek v4 flash client). Meta DB in `hearth-coach/meta/`.
+  `coach_llm.py` (DeepSeek v4 flash client), `value.py` (minion value + sell
+  ranking), `coach.py` (situation analysis loop), `live.py` (live Power.log
+  monitor that advises each buy phase). Meta DB in `hearth-coach/meta/`.
 - hsreplay's minions/heroes/dark-gifts APIs are Cloudflare-protected (403) —
   those meta assets come from manual paste; comps/trinkets pages and the wiki
   (hearthstone.wiki.gg) are scrapable.
