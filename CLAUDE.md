@@ -31,8 +31,12 @@ following a shared pattern (see `.claude/skills/coach-pattern/`).
 - `hearth-coach/` tools: `board_state.py` (board parse), `bans.py` (per-game
   5/5 family ban + comp filter), `scrape_comps.py` (hsreplay comps),
   `coach_llm.py` (DeepSeek v4 flash client), `value.py` (minion value + sell
-  ranking), `coach.py` (situation analysis loop), `live.py` (live Power.log
-  monitor that advises each buy phase). Meta DB in `hearth-coach/meta/`.
+  ranking + shop ranking + top move), `simulate_growth.py` (deterministic growth
+  simulator, 13 engines in `meta/engines.json`), `coach.py` (situation analysis
+  loop), `live_coach.py` (incremental live coach), `live.py` (live Power.log
+  monitor + overlay server), `coach_ui.py` (V1 overlay), `validate_growth.py`
+  (simulator validation), `replay_stats.py` (replay-analysis pipeline → corpus
+  stats). Meta DB in `hearth-coach/meta/`.
 - hsreplay's minions/heroes/dark-gifts APIs are Cloudflare-protected (403) —
   those meta assets come from manual paste; comps/trinkets pages and the wiki
   (hearthstone.wiki.gg) are scrapable.
