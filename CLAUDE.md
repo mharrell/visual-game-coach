@@ -31,7 +31,8 @@ following a shared pattern (see `.claude/skills/coach-pattern/`).
 - `hearth-coach/` tools: `board_state.py` (board parse), `bans.py` (per-game
   5/5 family ban + comp filter), `scrape_comps.py` (hsreplay comps),
   `coach_llm.py` (DeepSeek v4 flash client), `value.py` (minion value + sell
-  ranking + shop ranking + top move), `simulate_growth.py` (deterministic growth
+  ranking + shop ranking (minions and tavern spells) + top move),
+  `simulate_growth.py` (deterministic growth
   simulator, 13 engines in `meta/engines.json`), `coach.py` (situation analysis
   loop), `live_coach.py` (incremental live coach), `live.py` (live Power.log
   monitor + overlay server), `coach_ui.py` (V1 overlay), `validate_growth.py`
