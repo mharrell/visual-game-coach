@@ -73,6 +73,7 @@ hearth-coach/
 | `choices.py` | hero / trinket / discover pick ranking (season-pass-locked fallback) |
 | `replay_review.py` | per-phase coach-recommendation vs player-actions diff |
 | `replay_stats.py` | deterministic replay-analysis pipeline (corpus stats) |
+| `build_baseline.py` | mines the corpus into `meta/turn_baseline.json` (median board stats per turn — the leveling prior) |
 | `validate_growth.py` | simulator validation against real games |
 | `extend_pool.py`, `parse_*.py`, `scrape_comps.py`, `fetch_transcripts.py` | meta build/refresh |
 | `patch_notes.py`, `check_patch_notes.py` | apply official patch notes to the meta DB (dry-run default) |
