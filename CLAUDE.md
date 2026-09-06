@@ -30,7 +30,8 @@ following a shared pattern (see `.claude/skills/coach-pattern/`).
   `hearth-powerlog-locate` skill).
 - `hearth-coach/` tools: `board_state.py` (board parse; spending-aware gold),
   `bans.py` (per-game 5/5 family ban + comp filter), `scrape_comps.py`
-  (hsreplay comps), `coach_llm.py` (DeepSeek v4 flash client), `value.py`
+  (hsreplay comps), `coach_llm.py` (GLM 5.3 flash client, provider-agnostic),
+  `value.py`
   (minion value + sell ranking + shop ranking (minions and tavern spells) +
   top move — real upgrade button prices, level-vs-board rule, comp-pivot
   tracking), `simulate_growth.py` (deterministic growth simulator, engine
