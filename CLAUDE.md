@@ -47,8 +47,11 @@ following a shared pattern (see `.claude/skills/coach-pattern/`).
   suite: `python -m unittest discover -s tests`.
 - BG tavern upgrade prices are dynamic: start at (target+3) gold and drop 1
   at the start of each round you wait — the coach reads the live button COST
-  from the log; a minion's buy price is its tavern TIER (mana `cost` is
-  never the buy price). A BG minion costs its tier in gold.
+  from the log. Since patch 36.4.x a minion's BUY COST is per-card and
+  decoupled from its tavern TIER (2026-09-05 logs: 86 of 117 shop creations
+  differ — Lullabot tier 1 but costs 2), so the coach reads each offer's
+  entity COST tag (printed as `tag=479`) from the log (`shop_cost_map` in
+  `live_coach.py`); the DB `tier` is only the fallback for unpriced cards.
 - Privacy: Power.log's only personal data is BattleTags (no IPs, emails,
   paths, or account IDs) — `sanitize_log.py` redacts them before anything
   leaves the machine. HSReplay does not share replay data; the beta gathers
