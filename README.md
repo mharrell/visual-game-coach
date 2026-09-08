@@ -10,6 +10,11 @@ following a shared pattern (see `.claude/skills/coach-pattern/`).
   gives dynamic, explainable advice — competing with HSReplay/Firestone stat
   overlays on *reasoning*, not raw data volume.
 
+  **New to the coach? Start with [hearth-coach/README.md](hearth-coach/README.md)** —
+  install, quick start (including the enable-file-logging step everyone
+  misses), what each overlay box means, privacy, and troubleshooting. The
+  rest of this README is the contributor's map.
+
 ## The shared pattern
 
 1. **Pick a coaching-friendly game** — turn-based / decision-timed, where good
@@ -33,8 +38,9 @@ following a shared pattern (see `.claude/skills/coach-pattern/`).
 Reads the live Hearthstone `Power.log`, reconstructs your board, and runs a
 **value function + growth simulator** to advise each buy phase: what to buy,
 what to sell, whether to level (priced at the real upgrade button), which hero
-or trinket to pick. A local overlay shows the advice live in a three-column
-layout (Decide / Build / Market) with card art for every card.
+or trinket to pick. A local browser overlay shows the advice live — one
+priority column (a big "Do this now" headline, then game-like card tiles:
+Sell row, hand, shop, comps) with card art for every card.
 
 ### Directory layout
 
@@ -54,6 +60,7 @@ hearth-coach/
     transcripts/  — raw YouTube auto-transcripts (source for the guides)
     corpus_stats.json — aggregate outcome data from your replays
   img_cache/      — card art (HearthstoneJSON renders + client-extracted)
+  decision_logs/  — local record of every advisory (no personal data)
   tests/          — golden-test suite (python -m unittest discover -s tests)
   python-hslog/   — vendored official HearthSim parser (gitignored)
 ```
@@ -69,7 +76,7 @@ hearth-coach/
 | `coach.py` | batch situation analysis of a game |
 | `live_coach.py` | incremental live coach (fast per-buy-phase analysis) |
 | `live.py` | live monitor + starts the overlay server |
-| `coach_ui.py` | overlay (local HTTP server + HTML page; three columns, prices, art) |
+| `coach_ui.py` | overlay (local HTTP server + HTML page; priority column, prices, art) |
 | `choices.py` | hero / trinket / discover pick ranking (season-pass-locked fallback) |
 | `replay_review.py` | per-phase coach-recommendation vs player-actions diff |
 | `replay_stats.py` | deterministic replay-analysis pipeline (corpus stats) |
@@ -88,12 +95,12 @@ hearth-coach/
 **Live coaching** (while Hearthstone is running):
 ```
 cd hearth-coach
-python live.py            # starts the overlay; prints http://127.0.0.1:8747/
+python live.py            # starts the overlay; prints its http://127.0.0.1:<port>/ URL
 ```
-Open the printed URL in Chrome, dock it beside the game. The overlay updates
+Open the printed URL in a browser, dock it beside the game. The overlay updates
 each buy phase (and mid-turn on every buy/roll/sell) with a top-move headline,
-the plan's actual buy (with its tavern price), target comp with art, board,
-sell ranking, tavern shop, comps, and banned tribes.
+the plan's actual buy (with its tavern price), sell row, hand tiles, comp
+direction, ranked tavern shop, comps, banned tribes, and the combat forecast.
 
 **Analyze one game** (batch):
 ```
@@ -110,16 +117,18 @@ python replay_review.py <Power.log> [game_index]   # or --latest
 python hearth_art_extract.py     # pulls 100% of the art from the local client
 ```
 
-**The beta corpus loop** (advice-vs-outcome data):
+**The beta corpus loop** (advice-vs-outcome data — entirely opt-in):
 ```
 python upload_corpus.py --latest   # sanitize + package + upload in one command
 ```
-Records every advisory alongside the Power.log (`decision_log.py`), redacts
-BattleTags (`sanitize_log.py` — the log's only personal data; a pattern scan
-found no IPs, emails, paths, or account IDs anywhere), packages the session
-into a single ~5MB bundle (`package_corpus.py`), and uploads it to the private
+Records every advisory alongside the Power.log (`decision_log.py`; set
+`HEARTH_TELEMETRY=0` to record nothing), redacts BattleTags
+(`sanitize_log.py` — the log's only personal data; a pattern scan found no
+IPs, emails, paths, or account IDs anywhere), packages the session into a
+single ~5MB bundle (`package_corpus.py`), and uploads it to the private
 telemetry repo (`mharrell/hearth-telemetry`; override with
-`HEARTH_TELEMETRY_REPO`, auth via the `gh` CLI or `GH_TELEMETRY_TOKEN`).
+`HEARTH_TELEMETRY_REPO` — point it at your own repo, the default is the
+maintainer's), auth via the `gh` CLI or `GH_TELEMETRY_TOKEN`.
 
 **Validate the simulator** against a real game:
 ```
@@ -134,8 +143,8 @@ python validate_growth.py <Power.log> [game_index]
 - The growth simulator is conservative (underestimates real growth ~1.6–2x);
   tuning it against the growing corpus is the next step.
 - Tavern upgrade prices change every turn (start at target+3 gold, drop 1 per
-  turn you wait) — the coach reads the live button price from the log rather
-  than modeling it.
+  turn you wait); minions cost a flat 3 gold at every tier — the coach reads
+  live prices from the log rather than modeling them.
 - Privacy: Power.log contains no machine identifiers; its only personal data is
   BattleTags, which `sanitize_log.py` redacts to P1/P2/... before anything
   leaves the machine.
