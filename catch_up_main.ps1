@@ -29,10 +29,15 @@ param(
 $ErrorActionPreference = "Stop"
 
 function Invoke-Git {
-    param([string[]]$Args)
-    & git @Args
+    # NOTE: never name the param $Args — it collides with PowerShell's
+    # automatic $Args catcher and the binder silently eats the first bare
+    # token ("push" vanished from the 2026-09-08 run: git got
+    # `-C <path> origin <branch>`). Call sites pass the whole command as
+    # one array, splatted positionally.
+    param([string[]]$GitArgs)
+    & git @GitArgs
     if ($LASTEXITCODE -ne 0) {
-        throw "git $($Args -join ' ') failed (exit $LASTEXITCODE)"
+        throw "git $($GitArgs -join ' ') failed (exit $LASTEXITCODE)"
     }
 }
 
@@ -73,14 +78,14 @@ foreach ($t in $targets) {
         $msg = if ($Message) { $Message } else {
             "Auto-commit from $($t.branch) ($(Get-Date -Format yyyy-MM-dd))"
         }
-        Invoke-Git -C $t.path add -A
-        Invoke-Git -C $t.path commit -m $msg
+        Invoke-Git @("-C", $t.path, "add", "-A")
+        Invoke-Git @("-C", $t.path, "commit", "-m", $msg)
         Write-Host "  committed $($t.branch): $msg"
     } else {
         Write-Host "  $($t.branch): nothing to commit"
     }
     if (-not $NoPush) {
-        Invoke-Git -C $t.path push origin $t.branch
+        Invoke-Git @("-C", $t.path, "push", "origin", $t.branch)
     }
 }
 
@@ -91,13 +96,13 @@ foreach ($t in $targets) {
         Write-Host "  $($t.branch): already in main, skipping"
         continue
     }
-    Invoke-Git -C $main.path merge $t.branch --no-edit
+    Invoke-Git @("-C", $main.path, "merge", $t.branch, "--no-edit")
     Write-Host "  merged $($t.branch) into main"
 }
 
 # --- 3. Push main ------------------------------------------------------------
 if (-not $NoPush) {
-    Invoke-Git -C $main.path push origin main
+    Invoke-Git @("-C", $main.path, "push", "origin", "main")
     Write-Host "  pushed main to origin"
 }
 
@@ -106,11 +111,11 @@ if (-not $KeepWorktrees) {
     foreach ($t in $targets) {
         git -C $main.path merge-base --is-ancestor $t.branch main
         if ($LASTEXITCODE -ne 0) { continue }   # only remove fully-merged
-        Invoke-Git -C $main.path worktree remove $t.path --force
-        Invoke-Git -C $main.path branch -d $t.branch
+        Invoke-Git @("-C", $main.path, "worktree", "remove", $t.path, "--force")
+        Invoke-Git @("-C", $main.path, "branch", "-d", $t.branch)
         Write-Host "  removed worktree + branch $($t.branch)"
     }
-    Invoke-Git -C $main.path worktree prune
+    Invoke-Git @("-C", $main.path, "worktree", "prune")
 }
 
 Write-Host "Done. Main is caught up."
