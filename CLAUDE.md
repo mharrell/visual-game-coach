@@ -62,7 +62,9 @@ following a shared pattern (see `.claude/skills/coach-pattern/`).
   + overlay server), `coach_ui.py` (overlay: three-column Decide/Build/Market
   layout, prices, art), `choices.py` (hero/trinket/discover pick ranking),
   `pool.py` (own-side shared-pool ledger: Market availability chips + the
-  triple/hunt pool gates; opponent holdings join in phase 2 — see
+  triple/hunt pool gates) and `lobby.py` (seat-level opponent snapshots
+  from the combat staging bursts: next-opponent comp preview, lobby tribe
+  pressure, fresh-seat pool subtraction — see
   `analysis/pool_availability.md`), `pool_forensics.py` (re-derives the
   pool-estimator log mechanics from any session log),
   `validate_growth.py` (simulator validation), `replay_review.py` (per-phase
