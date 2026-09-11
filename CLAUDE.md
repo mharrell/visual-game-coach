@@ -3,6 +3,26 @@
 Umbrella project for AI-assisted game coaches. One subdirectory per game, all
 following a shared pattern (see `.claude/skills/coach-pattern/`).
 
+## Worktree discipline
+
+- Code work happens in git worktrees under `.claude/worktrees/`. **Main is the
+  only truth; origin is backup. If it's not in main, it's not done.**
+- Every session that touched code ends with `powershell -File
+  catch_up_main.ps1` (commit, merge into main, push, clean up) — or ends by
+  explicitly reporting "branch X, N commits, NOT merged". A Stop hook
+  (`wt_status.ps1 -RemindOnly`) nags once when unmerged work exists at session
+  end. Locked worktrees are skipped — whoever closes that session re-runs the
+  script once; it is safe to re-run at any time.
+- `powershell -File wt_status.ps1` answers "is everything merged?" in one
+  command: per-branch dirty/ahead counts (patch-equivalence-aware via
+  `git cherry`), plus origin-only leftovers. No git archaeology.
+- Branch from FRESH main (EnterWorktree's default bases off origin/main).
+  Starting from a stale base is how the same bug got fixed twice on two
+  branches (2026-09-10: comp-progress crash, two parallel fixes).
+- After a merge, the merged remote branch is deleted too (the script does it).
+  Memory/notes cite only shas that are actually reachable from main — until a
+  branch lands, name the branch, not the sha.
+
 ## Games
 
 - `hearth-coach/` — Hearthstone Battlegrounds coach (reference implementation).

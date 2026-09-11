@@ -114,6 +114,13 @@ if (-not $KeepWorktrees) {
         Invoke-Git @("-C", $main.path, "worktree", "remove", $t.path, "--force")
         Invoke-Git @("-C", $main.path, "branch", "-d", $t.branch)
         Write-Host "  removed worktree + branch $($t.branch)"
+        # Origin is backup, not truth: the fully-merged branch's remote copy
+        # goes too (the step-1 push already served its backup purpose).
+        # Tolerant: the branch may never have been pushed.
+        & git -C $main.path push origin "--delete" $t.branch 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            Write-Host "  deleted origin/$($t.branch)"
+        }
     }
     Invoke-Git @("-C", $main.path, "worktree", "prune")
 }

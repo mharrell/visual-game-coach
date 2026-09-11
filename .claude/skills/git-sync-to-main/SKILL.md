@@ -25,10 +25,30 @@ What it does, in order:
 2. **Push** each worktree branch to origin (backup before merging).
 3. **Merge** each branch into `main`.
 4. **Push** `main` to origin.
-5. **Clean up** — remove the merged worktrees and delete their branches.
+5. **Clean up** — remove the merged worktrees and delete their branches
+   (local and on origin — origin is backup, main is the truth).
 
 **Locked worktrees are skipped** (an active Claude session sets the `locked`
-flag), so a running session is never disturbed.
+flag), so a running session is never disturbed. Whoever closes that session
+re-runs the script once — it is safe to re-run at any time.
+
+## Check status first: `wt_status.ps1`
+
+One command answers "is everything merged?" — the exact checks that used to
+need git-cherry archaeology:
+
+```powershell
+powershell -File wt_status.ps1
+```
+
+Per worktree branch: dirty file count, commits ahead of main
+(patch-equivalence-aware via `git cherry`, so a duplicate/rebased commit that
+main already contains reads as merged), plus a table of origin-only
+`worktree-*` branches (prune candidates vs still-carrying-unmerged-work).
+Verdict line: `EVERYTHING IS MERGED` or `UNMERGED WORK EXISTS`.
+
+`powershell -File wt_status.ps1 -RemindOnly` is the Stop-hook mode: silent
+when clean, one warning per unmerged branch (exit 1) otherwise.
 
 ## Options
 
@@ -59,9 +79,14 @@ git worktree remove <path> --force     # then: git branch -d <branch>
 
 ## When to use
 
-- At the end of a worktree-based session, to land the work on `main`.
+- At the end of a worktree-based session, to land the work on `main`. **This
+  is the standard last step of any session that touched code** — or the
+  session ends by explicitly reporting "branch X, N commits, NOT merged"
+  (see the Worktree discipline section in the root CLAUDE.md).
 - Whenever `main` is behind `origin/main` or behind worktree branches.
 - After a merge conflict was resolved, to finish the catch-up.
+- After closing a session that owned a locked worktree (its branch is now
+  unlocked and the script will pick it up).
 
 ## Note on local vs origin
 
