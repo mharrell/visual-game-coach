@@ -54,7 +54,9 @@ following a shared pattern (see `.claude/skills/coach-pattern/`).
   `value.py`
   (minion value + sell ranking + shop ranking (minions and tavern spells) +
   top move — real upgrade button prices, level-vs-board rule, comp-pivot
-  tracking), `simulate_growth.py` (deterministic growth simulator, engine
+  tracking; combat-phase stat gains are non-persistent per player rule
+  2026-09-11 — combat-only buff-givers are W_COMBAT_SCALE power, not growth
+  engines), `simulate_growth.py` (deterministic growth simulator, engine
   model in `meta/engines.json`), `coach.py` (situation analysis loop),
   `live_coach.py` (incremental live coach), `live.py` (live Power.log monitor
   + overlay server), `coach_ui.py` (overlay: three-column Decide/Build/Market
