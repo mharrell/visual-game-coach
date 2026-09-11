@@ -116,11 +116,17 @@ if (-not $KeepWorktrees) {
         Write-Host "  removed worktree + branch $($t.branch)"
         # Origin is backup, not truth: the fully-merged branch's remote copy
         # goes too (the step-1 push already served its backup purpose).
-        # Tolerant: the branch may never have been pushed.
+        # Tolerant: the branch may never have been pushed. PS 5.1 turns a
+        # native command's stderr (git prints the [deleted] notices there)
+        # into a terminating error under Stop preference — relax it around
+        # the call or the loop dies on the FIRST deleted branch.
+        $prevEap = $ErrorActionPreference
+        $ErrorActionPreference = "Continue"
         & git -C $main.path push origin "--delete" $t.branch 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Host "  deleted origin/$($t.branch)"
         }
+        $ErrorActionPreference = $prevEap
     }
     Invoke-Git @("-C", $main.path, "worktree", "prune")
 }
