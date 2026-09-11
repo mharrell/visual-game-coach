@@ -39,21 +39,20 @@ python hearth-coach\extract_board.py <PowerFile> <startLine> <endLine>
 ## What to filter (noise)
 
 - Card IDs starting with: `TB_BaconShop_`, `BG36_MidGameEffect_`,
-  `BG36_Button_`, `BG30_Trinket_`, `BG32_MagicItem_`, `BG_ShopBuff_`,
-  `EBG_Spell_`, `BG20_GEM`
-- Card ID tails: `e`, `t`, `G`, `d`, `te`, `e2`, `e3` (enchantments/tokens)
+  `BG36_Button_`, `BG30_Trinket_`, `BG32_MagicItem_`, `BG_ShopBuff`
+  (also bare `BG_ShopBuff`), `EBG_Spell_`, `BG20_GEM`
+- Card ID tails: `e`, `t`, `d`, `te` and their digit variants (`e2`, `te3`,
+  ...) (enchantments/tokens). **`_G` goldens are NOT noise** — a golden on
+  board is a real minion (strip trailing digits before the tail check;
+  corrected 2026-09-11 — the old list filtered real goldens like
+  `BG31_035_G` Golden Groundbreaker off the board).
 
 ## Tribe inference from card prefix
 
-Card ID prefixes map to Battlegrounds tribes (useful sanity check against what
-the player remembers):
-
-| Prefix | Tribe |
-|--------|-------|
-| `BG23_*` | Naga |
-| `BG25_*` | Elemental |
-| `BG26_*` / `BG31_*` | Pirates |
-| `BG28_*` | Murloc / Mech (verify per set) |
+Card ID prefixes are set-dependent and drift every season — do not trust a
+fixed prefix→tribe table. Resolve tribe from the coach's meta DB
+(`hearth-coach/meta/minions.json`, e.g. `BG31_920` = Darkcrest Strategist =
+Naga in the 2026-09 season) or ask the player.
 
 **Always prefer the player's own read** of what they played over an automated
 extract — verify before asserting a composition.
