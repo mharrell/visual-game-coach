@@ -61,6 +61,10 @@ following a shared pattern (see `.claude/skills/coach-pattern/`).
   `live_coach.py` (incremental live coach), `live.py` (live Power.log monitor
   + overlay server), `coach_ui.py` (overlay: three-column Decide/Build/Market
   layout, prices, art), `choices.py` (hero/trinket/discover pick ranking),
+  `pool.py` (own-side shared-pool ledger: Market availability chips + the
+  triple/hunt pool gates; opponent holdings join in phase 2 — see
+  `analysis/pool_availability.md`), `pool_forensics.py` (re-derives the
+  pool-estimator log mechanics from any session log),
   `validate_growth.py` (simulator validation), `replay_review.py` (per-phase
   coach-vs-player diff), `replay_stats.py` (replay-analysis pipeline → corpus
   stats), `hearth_art_extract.py` (UnityPy card-art extraction from the local
