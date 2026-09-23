@@ -79,6 +79,17 @@ following a shared pattern (see `.claude/skills/coach-pattern/`).
   `decision_log.py` + `package_corpus.py` + `upload_corpus.py` (beta corpus →
   private repo `mharrell/hearth-telemetry`). Meta DB in `hearth-coach/meta/`;
   suite: `python -m unittest discover -s tests`.
+- Automation toolkit (2026-09-23, output tokens are the expensive side — every
+  entry point below is bounded to a few lines and takes `--json`): `patch_day.py`
+  (detect patch → fetch notes → canary the parsers → report to `patch_reports/`;
+  `--apply` refreshes notes/roster/trinkets/art), `doctor.py` (one-shot pre-flight
+  verdict: patch, coverage, gates, art, newest log), `logquery.py` (eight bounded
+  Power.log queries), `review_kit.py` (per-game review skeleton + turn drill-down,
+  cached under `.review_cache/`), `comp_miner.py` (mine OUR corpus for comps the
+  scraped source lacks; proposes to `meta/comp_candidates.json`, never writes
+  `meta/comps.json`), and root `sync.py` (commit + merge + push in one command).
+  Hazard worth remembering: `scrape_comps.py --diff` REPORTS but still WRITES —
+  `--dry-run` is the flag that does not.
 - BG tavern upgrade prices are dynamic: start at (target+3) gold and drop 1
   at the start of each round you wait — the coach reads the live button COST
   from the log. **Minions cost a FLAT 3 gold, all tiers** (player-confirmed
