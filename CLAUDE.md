@@ -49,14 +49,19 @@ following a shared pattern (see `.claude/skills/coach-pattern/`).
 - Hearthstone logs live at `C:\Program Files (x86)\Hearthstone\Logs\...` (see the
   `hearth-powerlog-locate` skill).
 - `hearth-coach/` tools: `board_state.py` (board parse; spending-aware gold),
-  `bans.py` (per-game 5/5 family ban + comp filter), `scrape_comps.py`
+  `bans.py` (per-game 5/5 family ban + comp filter; the ban list is provably
+  NOT in any log — identical CREATE_GAME setup across different-ban games,
+  2026-09-19 — so the inference is pool-statistical and the overlay's manual
+  ban picker (`POST /bans` → live_coach) supplies exact bans from the reveal
+  screen), `scrape_comps.py`
   (hsreplay comps), `coach_llm.py` (GLM 5.3 flash client, provider-agnostic),
   `value.py`
   (minion value + sell ranking + shop ranking (minions and tavern spells) +
   top move — real upgrade button prices, level-vs-board rule, comp-pivot
   tracking; combat-phase stat gains are non-persistent per player rule
   2026-09-11 — combat-only buff-givers are W_COMBAT_SCALE power, not growth
-  engines), `simulate_growth.py` (deterministic growth simulator, engine
+  engines; casting a spell from HAND is free per player rule + log ground
+  truth 2026-09-19 — only the tavern BUY charges the price),
   model in `meta/engines.json`), `coach.py` (situation analysis loop),
   `live_coach.py` (incremental live coach), `live.py` (live Power.log monitor
   + overlay server), `coach_ui.py` (overlay: three-column Decide/Build/Market
