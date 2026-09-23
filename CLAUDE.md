@@ -86,8 +86,11 @@ following a shared pattern (see `.claude/skills/coach-pattern/`).
   verdict: patch, coverage, gates, art, newest log), `logquery.py` (eight bounded
   Power.log queries), `review_kit.py` (per-game review skeleton + turn drill-down,
   cached under `.review_cache/`), `comp_miner.py` (mine OUR corpus for comps the
-  scraped source lacks; proposes to `meta/comp_candidates.json`, never writes
-  `meta/comps.json`), and root `sync.py` (commit + merge + push in one command).
+  scraped source lacks; proposes to `meta/comp_candidates.json`, and
+  `--promote` writes a PROVISIONAL entry into `meta/comps.json` — marked, with
+  its evidence attached; a provisional comp never outranks a published one and is
+  labelled everywhere it shows), and root `sync.py` (commit + merge + push in one
+  command).
   Hazard worth remembering: `scrape_comps.py --diff` REPORTS but still WRITES —
   `--dry-run` is the flag that does not.
 - BG tavern upgrade prices are dynamic: start at (target+3) gold and drop 1
