@@ -49,14 +49,19 @@ following a shared pattern (see `.claude/skills/coach-pattern/`).
 - Hearthstone logs live at `C:\Program Files (x86)\Hearthstone\Logs\...` (see the
   `hearth-powerlog-locate` skill).
 - `hearth-coach/` tools: `board_state.py` (board parse; spending-aware gold),
-  `bans.py` (per-game 5/5 family ban + comp filter), `scrape_comps.py`
+  `bans.py` (per-game 5/5 family ban + comp filter; the ban list is provably
+  NOT in any log — identical CREATE_GAME setup across different-ban games,
+  2026-09-19 — so the inference is pool-statistical and the overlay's manual
+  ban picker (`POST /bans` → live_coach) supplies exact bans from the reveal
+  screen), `scrape_comps.py`
   (hsreplay comps), `coach_llm.py` (GLM 5.3 flash client, provider-agnostic),
   `value.py`
   (minion value + sell ranking + shop ranking (minions and tavern spells) +
   top move — real upgrade button prices, level-vs-board rule, comp-pivot
   tracking; combat-phase stat gains are non-persistent per player rule
   2026-09-11 — combat-only buff-givers are W_COMBAT_SCALE power, not growth
-  engines), `simulate_growth.py` (deterministic growth simulator, engine
+  engines; casting a spell from HAND is free per player rule + log ground
+  truth 2026-09-19 — only the tavern BUY charges the price),
   model in `meta/engines.json`), `coach.py` (situation analysis loop),
   `live_coach.py` (incremental live coach), `live.py` (live Power.log monitor
   + overlay server), `coach_ui.py` (overlay: three-column Decide/Build/Market
@@ -74,6 +79,20 @@ following a shared pattern (see `.claude/skills/coach-pattern/`).
   `decision_log.py` + `package_corpus.py` + `upload_corpus.py` (beta corpus →
   private repo `mharrell/hearth-telemetry`). Meta DB in `hearth-coach/meta/`;
   suite: `python -m unittest discover -s tests`.
+- Automation toolkit (2026-09-23, output tokens are the expensive side — every
+  entry point below is bounded to a few lines and takes `--json`): `patch_day.py`
+  (detect patch → fetch notes → canary the parsers → report to `patch_reports/`;
+  `--apply` refreshes notes/roster/trinkets/art), `doctor.py` (one-shot pre-flight
+  verdict: patch, coverage, gates, art, newest log), `logquery.py` (eight bounded
+  Power.log queries), `review_kit.py` (per-game review skeleton + turn drill-down,
+  cached under `.review_cache/`), `comp_miner.py` (mine OUR corpus for comps the
+  scraped source lacks; proposes to `meta/comp_candidates.json`, and
+  `--promote` writes a PROVISIONAL entry into `meta/comps.json` — marked, with
+  its evidence attached; a provisional comp never outranks a published one and is
+  labelled everywhere it shows), and root `sync.py` (commit + merge + push in one
+  command).
+  Hazard worth remembering: `scrape_comps.py --diff` REPORTS but still WRITES —
+  `--dry-run` is the flag that does not.
 - BG tavern upgrade prices are dynamic: start at (target+3) gold and drop 1
   at the start of each round you wait — the coach reads the live button COST
   from the log. **Minions cost a FLAT 3 gold, all tiers** (player-confirmed
