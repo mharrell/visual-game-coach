@@ -42,9 +42,10 @@ coach per subdirectory can follow the same pattern (see
 Reads the live Hearthstone `Power.log`, reconstructs your board, and runs a
 **value function + growth simulator** to advise each buy phase: what to buy,
 what to sell, whether to level (priced at the real upgrade button), which hero
-or trinket to pick. A local browser overlay shows the advice live — one
-priority column (a big "Do this now" headline, then game-like card tiles:
-Sell row, hand, shop, comps) with card art for every card.
+or trinket to pick. A local browser overlay shows the advice live — two panes on
+a wide window (a sticky **Decide** pane: state strip, "Do this now" plan, hand;
+a scrolling **Reference** pane: sell row, comp direction, tavern, comps), one
+column below the breakpoint — with card art for every card.
 
 ### Directory layout
 
@@ -86,7 +87,7 @@ publish at all if the zip would carry personal data.
 | `coach.py` | batch situation analysis of a game |
 | `live_coach.py` | incremental live coach (fast per-buy-phase analysis) |
 | `live.py` | live monitor + starts the overlay server |
-| `coach_ui.py` | overlay (local HTTP server + HTML page; priority column, prices, art) |
+| `coach_ui.py` | overlay (local HTTP server + HTML page; two-pane Decide/Reference, prices, art) |
 | `choices.py` | hero / trinket / discover pick ranking (season-pass-locked fallback) |
 | `replay_review.py` | per-phase coach-recommendation vs player-actions diff |
 | `replay_stats.py` | deterministic replay-analysis pipeline (corpus stats) |
