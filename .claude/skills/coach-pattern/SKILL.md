@@ -1,6 +1,6 @@
 ---
 name: coach-pattern
-description: The reusable methodology for building an AI game coach (the "visual game coach" pattern). Use when bootstrapping a new game coach, designing a coach's architecture, or applying the breakoutBot discipline (verify-what-the-model-reads, observational-not-causal, sham-control eval) to a game.
+description: The reusable methodology for building an AI game coach (the Bob's Ledger pattern). Use when bootstrapping a new game coach, designing a coach's architecture, or applying the breakoutBot discipline (verify-what-the-model-reads, observational-not-causal, sham-control eval) to a game.
 ---
 
 # The Game Coach Pattern

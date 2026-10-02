@@ -1,7 +1,9 @@
-# Visual Game Coach
+# Bob's Ledger
 
-Umbrella project for AI-assisted game coaches. One subdirectory per game, all
-following a shared pattern (see `.claude/skills/coach-pattern/`).
+The product name for the Hearthstone Battlegrounds coach (the repo's
+internal folder is `hearth-coach/`). Umbrella layout for AI-assisted game
+coaches — one subdirectory per game, all following a shared pattern (see
+`.claude/skills/coach-pattern/`).
 
 ## Worktree discipline
 
@@ -25,7 +27,7 @@ following a shared pattern (see `.claude/skills/coach-pattern/`).
 
 ## Games
 
-- `hearth-coach/` — Hearthstone Battlegrounds coach (reference implementation).
+- `hearth-coach/` — Bob's Ledger, the Hearthstone Battlegrounds coach (reference implementation).
   Docs: `hearth-coach/DESIGN.md`, `hearth-coach/ROADMAP.md`,
   `hearth-coach/analysis/*.md`.
 

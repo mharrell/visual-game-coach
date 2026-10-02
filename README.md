@@ -1,19 +1,23 @@
-# Visual Game Coach
+# Bob's Ledger
 
-Umbrella project for AI-assisted game coaches. One subdirectory per game, all
-following a shared pattern (see `.claude/skills/coach-pattern/`).
+A real-time, explainable coaching overlay for Hearthstone Battlegrounds —
+competing with HSReplay/Firestone stat overlays on *reasoning*, not raw data
+volume. This repository is the project's home; the coach itself lives in
+`hearth-coach/` (the repo's internal folder name), structured so one game
+coach per subdirectory can follow the same pattern (see
+`.claude/skills/coach-pattern/`).
 
-## Games
+## The coach
 
-- **`hearth-coach/`** — Hearthstone Battlegrounds coach (the reference
-  implementation). A real-time coaching overlay that reads the live board and
-  gives dynamic, explainable advice — competing with HSReplay/Firestone stat
-  overlays on *reasoning*, not raw data volume.
+- **`hearth-coach/`** — **Bob's Ledger**, the Hearthstone Battlegrounds
+  coach. A real-time overlay that reads the live board and gives dynamic,
+  explainable advice.
 
-  **New to the coach? Start with [hearth-coach/README.md](hearth-coach/README.md)** —
-  install, quick start (including the enable-file-logging step everyone
-  misses), what each overlay box means, privacy, and troubleshooting. The
-  rest of this README is the contributor's map.
+  **New to Bob's Ledger? Start with
+  [hearth-coach/README.md](hearth-coach/README.md)** — install, quick start
+  (including the enable-file-logging step everyone misses), what each
+  overlay box means, privacy, and troubleshooting. The rest of this README
+  is the contributor's map.
 
 ## The shared pattern
 
@@ -31,7 +35,7 @@ following a shared pattern (see `.claude/skills/coach-pattern/`).
 
 ---
 
-## `hearth-coach/` — Battlegrounds coach
+## `hearth-coach/` — the Bob's Ledger build (Battlegrounds)
 
 ### What it does
 
