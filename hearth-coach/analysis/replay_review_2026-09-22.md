@@ -1,6 +1,6 @@
 # Replay review — 2026-09-22 morning (Master Nguyen 7th, Thorim 4th, Mutanus 4th, Captain Eudora 7th)
 
-Session `Hearthstone_2026_09_22_07_40_11`, 4 games (player `MikeySCE#1712`),
+Session `Hearthstone_2026_09_22`, 4 games (player `Player#1234`),
 reviewed on the `replays-0921-0922` worktree (main @ `603cbc1`). Patch **36.6**
 — 36.6.1 (Aberration type added, Naga rotated out) landed later the same day
 and is not applied here. Every card call below is 36.6 pool: game 1's ban set

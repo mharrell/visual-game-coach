@@ -1,6 +1,6 @@
 # Battlegrounds Power.log structure — what's actually recoverable
 
-Validated against a real session (`Hearthstone_2026_08_24_21_40_07\Power_old.log`,
+Validated against a real session (`Hearthstone_2026_08_24\Power_old.log`,
 2 games). This supersedes the earlier "grep only" notes in `OPPONENT_DATA.md`.
 
 ## The headline: hslog is the wrong tool for BG

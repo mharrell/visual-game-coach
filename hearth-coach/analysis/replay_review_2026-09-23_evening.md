@@ -1,6 +1,6 @@
 # Replay review — 2026-09-23 evening (Drest'agath, **1st**)
 
-Session `Hearthstone_2026_09_23_16_36_46`, 1 game. Hero **Drest'agath**, placement
+Session `Hearthstone_2026_09_23`, 1 game. Hero **Drest'agath**, placement
 **1st**, 19 buy phases of which 15 rendered a coach line. Live coach ran the build
 from this session (provisional Aberration comp, the swap arbiter, the fragility
 band). BattleTag redacted.

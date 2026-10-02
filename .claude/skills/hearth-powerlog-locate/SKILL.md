@@ -51,6 +51,6 @@ tags and a `GAME_SEED` value.
 
 ## Distinguish your account
 
-Your player name (e.g. `MikeySCE#1712`) appears in `PLAYSTATE` tag changes and
-`DebugPrintGame` lines (`PlayerName=MikeySCE#1712`). Use it to identify which
+Your player name (e.g. `Player#1234`) appears in `PLAYSTATE` tag changes and
+`DebugPrintGame` lines (`PlayerName=Player#1234`). Use it to identify which
 of the 8 players is you.

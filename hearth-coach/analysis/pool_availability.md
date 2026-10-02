@@ -2,7 +2,7 @@
 
 Feasibility review of the external `bg_pool_estimator.py` blueprint, then a
 forensics pass (`pool_forensics.py`, this branch) against a real session
-(`Hearthstone_2026_09_11_12_37_57`, 2 games: friendly=1/12 rounds and
+(`Hearthstone_2026_09_11`, 2 games: friendly=1/12 rounds and
 friendly=5/19 rounds). This doc records what the log actually supports, what
 it doesn't, and what the estimator must therefore look like.
 

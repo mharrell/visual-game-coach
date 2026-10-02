@@ -1,6 +1,6 @@
 # Replay review — 2026-09-17 morning (Reno Jackson, 7th)
 
-Session `Hearthstone_2026_09_17_07_20_14`, game 1 of 1 (07:20–07:42).
+Session `Hearthstone_2026_09_17`, game 1 of 1 (07:20–07:42).
 Live coach ran **1f6f968** (current main, decision-log `coach_version`) —
 the first game on the freshly re-scraped comps DB (2dd6c82). **Hero:**
 Reno Jackson (TB_BaconShop_HERO_41). **Trinket:** Deathly Phylactery.

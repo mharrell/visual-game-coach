@@ -1,11 +1,11 @@
 # Replay review — 2026-09-22 evening (Xyrella 5th, Marin the Manager 6th, Ambassador Faelin 1st)
 
-Session `Hearthstone_2026_09_22_20_59_06`, 3 games, all played on **patch
+Session `Hearthstone_2026_09_22`, 3 games, all played on **patch
 36.6.1 day one**. Coach = the pre-36.6.1 main that actually played them
 (worktree HEAD `1b008b1`; `meta/minions.json` 263 cards, `meta/comps.json`
 24 comps). Reviewed from the log; the overlay was not captured live, so every
 render below is a reconstruction (§1 says how faithful it is, and where it is
-not). Player `MikeySCE#1712` (friendly player numbers: game 1/2 `player=7`,
+not). Player `Player#1234` (friendly player numbers: game 1/2 `player=7`,
 game 3 `player=4`).
 
 Placements: **game 1 Xyrella 5th** (died t11, tier 4, 11 buy phases) ·
@@ -151,7 +151,7 @@ Vicious Mindslasher   ATK  79 / HEALTH 150
 ```
 
 Against the coach's **"their ~199"** for the whole board, and our 276. Result:
-`PLAYSTATE MikeySCE#1712 LOSING → LOST`, opponent `WON`; hero DAMAGE 24 → 39;
+`PLAYSTATE Player#1234 LOSING → LOST`, opponent `WON`; hero DAMAGE 24 → 39;
 **placement 5**. Only two of our minions ever attacked (Turquoise Skitterer,
 Imp-lusionist); the opponent lost nothing.
 
@@ -311,11 +311,11 @@ median under-read the opponent; in game 3's endgame it over-read it (it is a
 median over boards *we* fought, and this player's Aberration board was
 out-scaling them). Either way the anchor is the problem, not the ratio.
 
-**The decisive fight (t20).** Opponent Morehardcore, an Aberration mirror. Our
+**The decisive fight (t20).** Opponent <opponent>, an Aberration mirror. Our
 attackers: Faceless Converter ×2, Mysterious K'Thir, Harbinger Aph'lass
 (BGFYM_005_G), Ambassador Faelin (hero). Theirs: De-volition-ist ×2, Nightmare
 Corroder, Mysterious K'Thir, Mindbender Ghur'sha, N'raqi Sapper. Log outcome:
-`Morehardcore LOSING → LOST`, `MikeySCE#1712 WON` — placement **1**, at 9 HP,
+`<opponent> LOSING → LOST`, `Player#1234 WON` — placement **1**, at 9 HP,
 after ten consecutive fights without taking damage (HP 9 from t11 through t20).
 
 ## 6. Action items

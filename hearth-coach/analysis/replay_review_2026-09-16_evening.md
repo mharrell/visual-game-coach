@@ -1,6 +1,6 @@
 # Replay review — 2026-09-16 evening (Snake Eyes, 3rd)
 
-Session `Hearthstone_2026_09_16_22_10_11`, game 1. Live coach ran
+Session `Hearthstone_2026_09_16`, game 1. Live coach ran
 **a51c015** (current main, fresh restart after the trinket re-key — see
 decision-log `coach_version`), records 22:13–22:38. One game reviewed;
 more games were queued into the same Power.log afterwards, so every

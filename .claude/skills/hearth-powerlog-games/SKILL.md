@@ -49,8 +49,8 @@ Select-String -Path <PowerFile> -Pattern 'zone=PLAY.*cardId=TB_BaconShop_HERO_.*
 
 ## Identify your player
 
-Your name (e.g. `MikeySCE#1712`) appears in `DebugPrintGame`:
-`PlayerID=7, PlayerName=MikeySCE#1712`. `PlayerID` is the player number for that
+Your name (e.g. `Player#1234`) appears in `DebugPrintGame`:
+`PlayerID=7, PlayerName=Player#1234`. `PlayerID` is the player number for that
 game (may differ per lobby).
 
 ## Extract final placements

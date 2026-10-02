@@ -1,6 +1,6 @@
 # Replay review — 2026-09-21 evening (Yogg-Saron 8th, Tras'tath 6th, Sylvanas 3rd)
 
-Session `Hearthstone_2026_09_21_20_40_52`, 3 games (player `MikeySCE#1712`),
+Session `Hearthstone_2026_09_21`, 3 games (player `Player#1234`),
 reviewed with `replay_review.py` on the `replays-0921-0922` worktree (main
 @ `1b008b1`). Patch **36.6** — 36.6.1 (2026-09-22, Aberration type, Naga
 rotated out) is AFTER these games and is not applied here; every card call

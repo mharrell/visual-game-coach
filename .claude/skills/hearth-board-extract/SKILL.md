@@ -20,7 +20,7 @@ tokens, and a full SETASIDE dump at game end). Only extract minions **still in
 3. **Only trust minions whose last-known zone is `PLAY`** controlled by the
    target player.
 4. **Player number differs per lobby.** The friendly player is not always 3 or 7;
-   find it from `DebugPrintGame` (`PlayerName=MikeySCE#1712`).
+   find it from `DebugPrintGame` (`PlayerName=Player#1234`).
 
 ## Correct approach: track last-known zone per entity
 

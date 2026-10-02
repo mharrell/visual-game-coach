@@ -1,6 +1,6 @@
 # Replay review — 2026-09-23 morning (A. F. Kay 7th, Heistbaron Togwaggle **1st**)
 
-Session `Hearthstone_2026_09_23_06_22_31`, 2 games, reviewed with the new
+Session `Hearthstone_2026_09_23`, 2 games, reviewed with the new
 toolkit (`review_kit.py` skeleton + `--show`, `logquery.py`, `doctor.py`) rather
 than by hand — see the test-drive notes at the end for what that exposed.
 

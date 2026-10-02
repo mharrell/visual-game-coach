@@ -1,7 +1,7 @@
 # Engine-aware coaching: synergy, reachability, roll-vs-level
 
 Design agreed 2026-09-15 from the four-game session review
-(`Hearthstone_2026_09_15_07_46_34`: Tras'tath 6th, Voone 7th, Buttons 4th,
+(`Hearthstone_2026_09_15`: Tras'tath 6th, Voone 7th, Buttons 4th,
 Shudderwock **1st**) plus the 09-14 morning session. Three related upgrades,
 built in order 1 → 2 → 3 — each consumes the previous. **Core principle
 throughout: population stats stay the base of every pick; synergy only ever
@@ -28,7 +28,7 @@ Game 4 (Shudderwock 1st, 20 turns) — the positive case:
 - Coach never surfaced Tavern Tempest as the build key; its shop advice
   ranked by generic value only.
 
-Morning 09-15 games (same session, `Hearthstone_2026_09_15_07_46_34`) —
+Morning 09-15 games (same session, `Hearthstone_2026_09_15`) —
 the regression cases:
 
 - Game 1 (Tras'tath, 6th): t9/t12 "LEVEL — you're strong" while the board

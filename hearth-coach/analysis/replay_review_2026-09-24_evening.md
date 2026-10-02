@@ -1,6 +1,6 @@
 # Replay review — 2026-09-24 evening (Forest Lord Cenarius)
 
-**Result: 1st.** Session `Hearthstone_2026_09_24_22_11_18` game 1 (snapshot
+**Result: 1st.** Session `Hearthstone_2026_09_24` game 1 (snapshot
 reviewed, not the live file). 15 buy phases, advice taken 3/15 (20%),
 passed 8, not-applicable 4. This is also the first game on the reworked
 overlay (300 ms poll, ETag/304, kind-chipped plan, two panes) — the

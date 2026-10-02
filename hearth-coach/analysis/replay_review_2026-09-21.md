@@ -1,6 +1,6 @@
 # Replay review — 2026-09-21 (A. F. Kay 1st — the Elemental tavern-pump; Inge 3rd)
 
-Session `Hearthstone_2026_09_21_10_33_22`, 2 games (10:33–11:07), live coach
+Session `Hearthstone_2026_09_21`, 2 games (10:33–11:07), live coach
 on **54416c1** — the version stamped on every advisory of the session in
 `decision_logs/decision_Power.log.jsonl` (747 renders for 2026-09-21), so the
 live quotes below are what the overlay actually showed. Reviewed from branch

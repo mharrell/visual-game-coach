@@ -1,6 +1,6 @@
 # Replay review — 2026-09-19 (Guff Runetotem, 1st — first Demon game)
 
-Session `Hearthstone_2026_09_19_13_03_21`, 1 game (live coach on
+Session `Hearthstone_2026_09_19`, 1 game (live coach on
 68c5c5f; reviewed from a snapshot). **Placement 1.** All-demon board
 with three goldens by t15 (golden 887/912, golden 642/651, golden
 564/566), won at 22 HP.
@@ -60,7 +60,7 @@ decline, the board was already the argument.
    spell_effects/minion text already curated; only the engine *shape*
    is missing.
 
-## 5. Evening session (`Hearthstone_2026_09_19_17_15_36`): Marin 4th — died to divine shields at "602 vs ~163"
+## 5. Evening session (`Hearthstone_2026_09_19`): Marin 4th — died to divine shields at "602 vs ~163"
 
 Game 1 of the 17:15 session (game 2, Tavish, live at review time; live
 coach on current main). 13 buy phases, clean curve, heavy honest churn,

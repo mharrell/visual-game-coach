@@ -58,7 +58,7 @@ python extract_game.py <Power.log> [--games N] [--moves] [--compare]
 
 ## Validated on real data (session 2026-08-24)
 
-Extracted from `Hearthstone_2026_08_24_21_40_07\Power_old.log` (2 games):
+Extracted from `Hearthstone_2026_08_24\Power_old.log` (2 games):
 
 - **Game 1**: You = **Nightmare Lord Xavius** (BG36_HERO_105), **5th**. Winner:
   Inge, the Iron Hymn (tier 6); last: Murloc Holmes (tier 4).

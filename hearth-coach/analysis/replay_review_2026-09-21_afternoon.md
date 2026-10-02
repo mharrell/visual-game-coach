@@ -1,6 +1,6 @@
 # Replay review — 2026-09-21 afternoon (Sir Finley Mrrgglton 3rd — a 29k Demon wall the forecast priced at 2.9k)
 
-Session `Hearthstone_2026_09_21_12_14_32`, **1 game** (12:14–12:47), live
+Session `Hearthstone_2026_09_21`, **1 game** (12:14–12:47), live
 coach on **54416c1** (the version stamped on every advisory in
 `decision_logs/decision_Power.log.jsonl`); the quotes below are the overlay's
 own text. Reviewed from branch `worktree-replays-0921-0922`. **Sir Finley

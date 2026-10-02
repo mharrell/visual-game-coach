@@ -1,6 +1,6 @@
 # Replay review — 2026-09-23 late (Galakrond 4th, Dinotamer Brann 3rd)
 
-Session `Hearthstone_2026_09_23_20_45_13`, 2 games. BattleTag redacted. Live coach
+Session `Hearthstone_2026_09_23`, 2 games. BattleTag redacted. Live coach
 ran the post-discard build (provisional Aberration comp, swap arbiter, fragility
 band, discard loop).
 

@@ -1,6 +1,6 @@
 # Replay review — 2026-09-18 (Faelin 7th, Buttons 8th, Gallywix 5th, Marin 1st)
 
-Session `Hearthstone_2026_09_18_10_21_59`, 4 games (closed ~11:46).
+Session `Hearthstone_2026_09_18`, 4 games (closed ~11:46).
 Live coach ran **1f8492c** in games 1–2 and **099de10** from game 3
 (the comp double-count fix, restarted between games). **Game 1:**
 Ambassador Faelin, **7th**, 10 phases (t1 skipped by the hero power).
@@ -153,7 +153,7 @@ out the tempo deficit.
 
 ## 8. Afternoon session — George the Fallen 6th, A. F. Kay 3rd
 
-Session `Hearthstone_2026_09_18_16_17_31`, 2 games (closed 17:07),
+Session `Hearthstone_2026_09_18`, 2 games (closed 17:07),
 reviewed from a snapshot taken 17:09 (the §5 live-file guard, applied
 as practice). The live coach ran through the session (decision log
 written to 17:06; the rotation artifact `decision_unknown.jsonl`
