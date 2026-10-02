@@ -152,3 +152,23 @@ python validate_growth.py <Power.log> [game_index]
 - Privacy: Power.log contains no machine identifiers; its only personal data is
   BattleTags, which `sanitize_log.py` redacts to P1/P2/... before anything
   leaves the machine.
+
+## Updates
+
+The coach checks for a release once, at `live.py` startup (a single GET of
+the update manifest — offline or failing, it just starts). If a newer
+version is published it prints the version and the release note, asks
+y/N, and on yes: downloads the release zip, verifies its sha256 against
+the manifest, extracts it over the install (your `decision_logs/` and
+local data are never touched), and restarts itself onto the new code.
+`python update.py` does the same on demand; `--check` only reports. The
+check only runs at startup, so no update ever lands mid-session.
+
+Publishing a release is the maintainer's one command:
+
+```
+python publish_release.py --note "what changed"
+```
+
+(Zips the project — code, meta DB, docs; never local data or art cache —
+stamps the VERSION, and pushes zip + manifest to the collector's KV.)
