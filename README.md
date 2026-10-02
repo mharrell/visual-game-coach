@@ -61,13 +61,19 @@ hearth-coach/
     trinkets.json, dark_gifts.json, heroes.json, tavern_spells.json
     engines.json  — machine-readable growth engines
     guides/       — per-comp engine guides (mined from commentary)
-    transcripts/  — raw YouTube auto-transcripts (source for the guides)
-    corpus_stats.json — aggregate outcome data from your replays
+    corpus_stats.json — aggregate outcomes from the maintainer's corpus
   img_cache/      — card art (HearthstoneJSON renders + client-extracted)
   decision_logs/  — local record of every advisory (no personal data)
   tests/          — golden-test suite (python -m unittest discover -s tests)
   python-hslog/   — vendored official HearthSim parser (gitignored)
 ```
+
+A **release zip** carries the code, `meta/`, the client-facing `README.md`
+and `LICENSE` — not the repo-only parts: `analysis/` (internal research;
+its replay reviews name real opponents), `telemetry/` (the collector and
+its KV id), `CLAUDE.md`, `img_cache/` (fetched on demand), `transcripts/`
+and the local data dirs. `publish_release.py` enforces that, and refuses to
+publish at all if the zip would carry personal data.
 
 ### The tools
 
