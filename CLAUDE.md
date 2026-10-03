@@ -1,11 +1,29 @@
-# Bob's Ledger
+# visual-game-coach — umbrella
 
-The product name for the Hearthstone Battlegrounds coach (the repo's
-internal folder is `hearth-coach/`). Umbrella layout for AI-assisted game
-coaches — one subdirectory per game, all following a shared pattern (see
-`.claude/skills/coach-pattern/`).
+This repo is the home of the **shared pattern** for AI-assisted game coaches
+(one subdirectory per game). It is no longer the home of any coach.
 
-## Worktree discipline
+**Bob's Ledger (Hearthstone Battlegrounds) moved out on 2026-10-02:**
+<https://github.com/mharrell/bobs-ledger>. Its code, meta DB, tests, release
+channel (`telemetry/`) and history live there now. This repo keeps the
+pattern doc (`.claude/skills/coach-pattern/`) and the sync/worktree tooling
+for the next game.
+
+## Why it split
+
+A player arriving here could not tell what the coach was. The umbrella README
+pitched "AI-assisted game coaches", and the shipped docs carried 34
+references to language models — while the coach itself calls no model during
+play. A repo whose framing describes something the product is not confuses
+exactly the people it is for.
+
+Moving also let the coach's history be rewritten: it contained the
+maintainer's BattleTag, an opponent's handle and local profile paths from
+research notes. The extraction rewrote every commit, so the coach's history
+scans clean. **This repo's history still contains that material** — treat it
+as an archive, and use the coach repo for anything coach-shaped.
+
+## Worktree discipline (still applies here)
 
 - Code work happens in git worktrees under `.claude/worktrees/`. **Main is the
   only truth; origin is backup. If it's not in main, it's not done.**
@@ -18,97 +36,25 @@ coaches — one subdirectory per game, all following a shared pattern (see
 - `powershell -File wt_status.ps1` answers "is everything merged?" in one
   command: per-branch dirty/ahead counts (patch-equivalence-aware via
   `git cherry`), plus origin-only leftovers. No git archaeology.
-- Branch from FRESH main (EnterWorktree's default bases off origin/main).
-  Starting from a stale base is how the same bug got fixed twice on two
-  branches (2026-09-10: comp-progress crash, two parallel fixes).
-- After a merge, the merged remote branch is deleted too (the script does it).
-  Memory/notes cite only shas that are actually reachable from main — until a
-  branch lands, name the branch, not the sha.
-
-## Games
-
-- `hearth-coach/` — Bob's Ledger, the Hearthstone Battlegrounds coach (reference implementation).
-  Docs: `hearth-coach/DESIGN.md`, `hearth-coach/ROADMAP.md`,
-  `hearth-coach/analysis/*.md`.
+- Branch from FRESH main. Starting from a stale base is how the same bug got
+  fixed twice on two branches.
 
 ## The shared pattern (one line each)
 
-1. **Pick a coaching-friendly game** — turn-based / decision-timed, where good
-   play is *strategic and verbal*, not reflex. That's the LLM's strength.
-2. **Hybrid architecture** — the coach reasons over (live board state + curated
+1. **Pick a coaching-friendly game** — turn-based / decision-timed, where
+   good play is *strategic and verbal*, not reflex. That's the LLM's strength
+   (in the games where an LLM is used at all — Bob's Ledger is rule-based and
+   calls no model).
+2. **Hybrid architecture** — the coach reasons over (live state + curated
    meta reference + optional aggregate stats).
-3. **Mine the game's own logs** — replays/logs contain more than the player sees
-   (opponent data, full move streams). This is the data asset.
-4. **Structured meta reference** — a JSON DB (comps, cards, trinkets, dark gifts,
-   heroes, minions, tavern spells) in `hearth-coach/meta/`, refreshed on patches,
-   fetched per-decision (only the relevant subset), not all at once.
+3. **Mine the game's own logs** — replays/logs contain more than the player
+   sees. This is the data asset.
+4. **Structured meta reference** — a JSON DB in `meta/`, refreshed on
+   patches, fetched per-decision (only the relevant subset).
 5. **breakoutBot discipline** — verify what a vision model actually reads;
    observational data is not causal; sham-control any "coaching helps" claim;
    design before implementing.
 
-## Working notes
-
-- Hearthstone logs live at `C:\Program Files (x86)\Hearthstone\Logs\...` (see the
-  `hearth-powerlog-locate` skill).
-- `hearth-coach/` tools: `board_state.py` (board parse; spending-aware gold),
-  `bans.py` (per-game 5/5 family ban + comp filter; the ban list is provably
-  NOT in any log — identical CREATE_GAME setup across different-ban games,
-  2026-09-19 — so the inference is pool-statistical and the overlay's manual
-  ban picker (`POST /bans` → live_coach) supplies exact bans from the reveal
-  screen), `scrape_comps.py`
-  (hsreplay comps), `coach_llm.py` (GLM 5.3 flash client, provider-agnostic),
-  `value.py`
-  (minion value + sell ranking + shop ranking (minions and tavern spells) +
-  top move — real upgrade button prices, level-vs-board rule, comp-pivot
-  tracking; combat-phase stat gains are non-persistent per player rule
-  2026-09-11 — combat-only buff-givers are W_COMBAT_SCALE power, not growth
-  engines; casting a spell from HAND is free per player rule + log ground
-  truth 2026-09-19 — only the tavern BUY charges the price),
-  model in `meta/engines.json`), `coach.py` (situation analysis loop),
-  `live_coach.py` (incremental live coach), `live.py` (live Power.log monitor
-  + overlay server), `coach_ui.py` (overlay: two-pane Decide/Reference on
-  wide windows, prices, art), `choices.py` (hero/trinket/discover pick ranking),
-  `pool.py` (own-side shared-pool ledger: Market availability chips + the
-  triple/hunt pool gates) and `lobby.py` (seat-level opponent snapshots
-  from the combat staging bursts: next-opponent comp preview, lobby tribe
-  pressure, fresh-seat pool subtraction — see
-  `analysis/pool_availability.md`), `pool_forensics.py` (re-derives the
-  pool-estimator log mechanics from any session log),
-  `validate_growth.py` (simulator validation), `replay_review.py` (per-phase
-  coach-vs-player diff), `replay_stats.py` (replay-analysis pipeline → corpus
-  stats), `hearth_art_extract.py` (UnityPy card-art extraction from the local
-  client, 100% coverage), `sanitize_log.py` (BattleTag redaction),
-  `decision_log.py` + `package_corpus.py` + `upload_corpus.py` (beta corpus →
-  private repo `mharrell/hearth-telemetry`). Meta DB in `hearth-coach/meta/`;
-  suite: `python -m unittest discover -s tests`.
-- Automation toolkit (2026-09-23, output tokens are the expensive side — every
-  entry point below is bounded to a few lines and takes `--json`): `patch_day.py`
-  (detect patch → fetch notes → canary the parsers → report to `patch_reports/`;
-  `--apply` refreshes notes/roster/trinkets/art), `doctor.py` (one-shot pre-flight
-  verdict: patch, coverage, gates, art, newest log), `logquery.py` (eight bounded
-  Power.log queries), `review_kit.py` (per-game review skeleton + turn drill-down,
-  cached under `.review_cache/`), `comp_miner.py` (mine OUR corpus for comps the
-  scraped source lacks; proposes to `meta/comp_candidates.json`, and
-  `--promote` writes a PROVISIONAL entry into `meta/comps.json` — marked, with
-  its evidence attached; a provisional comp never outranks a published one and is
-  labelled everywhere it shows), and root `sync.py` (commit + merge + push in one
-  command).
-  Hazard worth remembering: `scrape_comps.py --diff` REPORTS but still WRITES —
-  `--dry-run` is the flag that does not.
-- BG tavern upgrade prices are dynamic: start at (target+3) gold and drop 1
-  at the start of each round you wait — the coach reads the live button COST
-  from the log. **Minions cost a FLAT 3 gold, all tiers** (player-confirmed
-  2026-09-06; log ground truth: Buzzing Vermin/Decoy Conjurer charged
-  RESOURCES_USED=3 while their entity `tag=479` said 1 — minion COST tags
-  are stale legacy tier costs and must not be trusted, nor is the DB
-  `tier` a price). Tavern spells keep their own per-spell prices (log COST
-  tag via `shop_cost_map`, else the spell DB) — `value._buy_prices` is the
-  one price layer both the affordability walk and the overlay use.
-- Privacy: Power.log's only personal data is BattleTags (no IPs, emails,
-  paths, or account IDs) — `sanitize_log.py` redacts them before anything
-  leaves the machine. HSReplay does not share replay data; the beta gathers
-  our own corpus (see `decision_log.py`).
-- hsreplay's minions/heroes/dark-gifts APIs are Cloudflare-protected (403) —
-  those meta assets come from manual paste; comps/trinkets pages are
-  scrapable. The wiki (hearthstone.wiki.gg) is NOW Cloudflare-blocked too
-  (2026-09-03) — card art comes from the local client instead.
+Details in `.claude/skills/coach-pattern/SKILL.md`. The reference
+implementation is Bob's Ledger — read it in its own repo, where the code sits
+at the root and the release zip is the tree.

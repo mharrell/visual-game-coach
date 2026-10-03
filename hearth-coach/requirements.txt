@@ -1,5 +1,0 @@
-# Runtime: the live coach needs only this one package.
-requests>=2.28
-
-# Dev-only extras live in requirements-dev.txt (transcript scraping, card
-# art extraction) — never needed to run the coach.
